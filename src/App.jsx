@@ -8,6 +8,7 @@ import Experience from './components/Experience'
 import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import Navbar from './components/Navbar'
+import Chatbot from './components/Chatbot'
 
 function App() {
     return (
@@ -32,6 +33,9 @@ function App() {
                     © {new Date().getFullYear()} Boomi Rao. Built with React & Three.js
                 </p>
             </footer>
+
+            {/* AI Chatbot */}
+            <Chatbot />
         </div>
     )
 }
