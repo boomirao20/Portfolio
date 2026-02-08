@@ -216,9 +216,23 @@ export default function Contact() {
 
     setStatus('submitting')
 
+    // DEMO_MODE: Set to true for testing without a real Formspree endpoint
+    const DEMO_MODE = false
+    // Your Formspree form ID
+    const FORMSPREE_ID = 'mwvnkjbk'
+
+    if (DEMO_MODE) {
+      // Simulate API call for demo purposes
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      setStatus('success')
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
+      setTouched({})
+      setTimeout(() => setStatus('idle'), 5000)
+      return
+    }
+
     try {
-      // Using Formspree for form handling - replace with your own endpoint
-      const response = await fetch('https://formspree.io/f/xpwzgqwl', {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -235,8 +249,15 @@ export default function Contact() {
         throw new Error('Failed to send')
       }
     } catch (error) {
-      setStatus('error')
-      setTimeout(() => setStatus('idle'), 4000)
+      // Fallback: Open mailto link
+      const mailtoLink = `mailto:boomirao0720@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\n\nMessage:\n${formData.message}`
+      )}`
+      window.open(mailtoLink, '_blank')
+      setStatus('success')
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
+      setTouched({})
+      setTimeout(() => setStatus('idle'), 5000)
     }
   }
 
