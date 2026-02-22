@@ -1,7 +1,7 @@
 import { Suspense, lazy, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowDown, FileDown, FolderOpen } from 'lucide-react'
+import { ArrowDown, MessageCircle, FolderOpen } from 'lucide-react'
 
 // Lazy load the 3D canvas for performance
 const CanvasContainer = lazy(() => import('./CanvasContainer'))
@@ -117,37 +117,14 @@ export default function Hero() {
                         <FolderOpen size={20} />
                         View Projects
                     </Link>
-                    <a
-                        href="/resume.pdf"
-                        download
+                    <Link
+                        to="/contact"
                         className="group flex items-center gap-2 px-8 py-4 border-2 border-gray-600 rounded-full font-heading font-semibold text-gray-300 transition-all duration-300 hover:border-accent-violet hover:text-white hover:scale-105"
                     >
-                        <FileDown size={20} />
-                        Download Resume
-                    </a>
+                        <MessageCircle size={20} />
+                        Get In Touch
+                    </Link>
                 </motion.div>
-            </motion.div>
-
-            {/* Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-            >
-                <a
-                    href="#about"
-                    aria-label="Scroll to About section"
-                    className="flex flex-col items-center gap-2 text-gray-500 hover:text-accent-blue transition-colors"
-                >
-                    <span className="text-sm font-body">Scroll</span>
-                    <motion.div
-                        animate={{ y: [0, 8, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                        <ArrowDown size={20} />
-                    </motion.div>
-                </a>
             </motion.div>
         </section>
     )

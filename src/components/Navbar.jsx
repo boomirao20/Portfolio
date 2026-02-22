@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Certifications', href: '#certifications' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About', to: '/about' },
+    { name: 'Skills', to: '/skills' },
+    { name: 'Experience', to: '/experience' },
+    { name: 'Certifications', to: '/certifications' },
+    { name: 'Contact', to: '/contact' },
 ]
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
+    const location = useLocation()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -32,25 +34,27 @@ export default function Navbar() {
         >
             <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
                 {/* Logo */}
-                <a
-                    href="#"
+                <Link
+                    to="/"
                     className="font-heading font-bold text-xl gradient-text"
                     aria-label="Boomi Rao - Home"
                 >
                     BR
-                </a>
+                </Link>
 
                 {/* Desktop Navigation */}
                 <ul className="hidden md:flex items-center gap-8">
                     {navLinks.map((link) => (
                         <li key={link.name}>
-                            <a
-                                href={link.href}
-                                className="font-body text-sm text-gray-400 hover:text-white transition-colors duration-200 relative group"
+                            <Link
+                                to={link.to}
+                                className={`font-body text-sm transition-colors duration-200 relative group ${location.pathname === link.to ? 'text-white' : 'text-gray-400 hover:text-white'
+                                    }`}
                             >
                                 {link.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-accent-blue to-accent-violet group-hover:w-full transition-all duration-300" />
-                            </a>
+                                <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-accent-blue to-accent-violet transition-all duration-300 ${location.pathname === link.to ? 'w-full' : 'w-0 group-hover:w-full'
+                                    }`} />
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -83,13 +87,14 @@ export default function Navbar() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: index * 0.1 }}
                                 >
-                                    <a
-                                        href={link.href}
+                                    <Link
+                                        to={link.to}
                                         onClick={() => setIsOpen(false)}
-                                        className="block px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors"
+                                        className={`block px-6 py-3 hover:bg-gray-800/50 transition-colors ${location.pathname === link.to ? 'text-white' : 'text-gray-400 hover:text-white'
+                                            }`}
                                     >
                                         {link.name}
-                                    </a>
+                                    </Link>
                                 </motion.li>
                             ))}
                         </ul>
@@ -99,3 +104,4 @@ export default function Navbar() {
         </motion.nav>
     )
 }
+
