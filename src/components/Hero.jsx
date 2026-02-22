@@ -1,10 +1,35 @@
-import { Suspense, lazy, useState, useEffect, useRef, useCallback } from 'react'
+import { Suspense, lazy, useState, useEffect, useRef, useCallback, Component } from 'react'
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { FolderOpen, MessageCircle } from 'lucide-react'
 
 // Lazy load the 3D canvas
 const CanvasContainer = lazy(() => import('./CanvasContainer'))
+
+// Error boundary for 3D canvas — catches WebGL crashes gracefully
+class CanvasErrorBoundary extends Component {
+    constructor(props) {
+        super(props)
+        this.state = { hasError: false }
+    }
+    static getDerivedStateFromError() {
+        return { hasError: true }
+    }
+    componentDidCatch(error, info) {
+        console.error('3D Canvas Error:', error, info)
+    }
+    render() {
+        if (this.state.hasError) {
+            return (
+                <div className="absolute inset-0 z-0 bg-gradient-to-br from-primary via-secondary to-primary">
+                    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-accent-blue/20 rounded-full blur-3xl animate-float" />
+                    <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent-violet/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '-3s' }} />
+                </div>
+            )
+        }
+        return this.props.children
+    }
+}
 
 // ── Interactive Letter Component ──────────────────────────────────
 
@@ -251,7 +276,7 @@ export default function Hero() {
 
     useEffect(() => {
         const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+            setIsMobile(window.innerWidth < 768)
         }
         checkMobile()
         window.addEventListener('resize', checkMobile)
@@ -308,9 +333,11 @@ export default function Hero() {
             {/* WebGL Background — Desktop */}
             {!isMobile && showCanvas && (
                 <div className="absolute inset-0 z-0">
-                    <Suspense fallback={<div className="w-full h-full bg-primary" />}>
-                        <CanvasContainer isMobile={isMobile} />
-                    </Suspense>
+                    <CanvasErrorBoundary>
+                        <Suspense fallback={<div className="w-full h-full bg-primary" />}>
+                            <CanvasContainer isMobile={isMobile} />
+                        </Suspense>
+                    </CanvasErrorBoundary>
                 </div>
             )}
 
