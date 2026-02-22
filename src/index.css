@@ -100,3 +100,114 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
 }
+
+/* ─── Hero Section ─────────────────────────────────────────── */
+
+.hero-section {
+  cursor: none;
+}
+
+/* Interactive Name */
+.hero-name {
+  background: linear-gradient(
+    135deg,
+    #3B82F6 0%,
+    #8B5CF6 25%,
+    #06B6D4 50%,
+    #8B5CF6 75%,
+    #3B82F6 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Magnetic Buttons */
+.hero-btn-primary {
+  background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.hero-btn-primary:hover {
+  box-shadow: 0 6px 30px rgba(59, 130, 246, 0.5), 0 0 60px rgba(139, 92, 246, 0.2);
+  transform: scale(1.05);
+}
+
+.hero-btn-secondary {
+  border: 2px solid rgba(107, 114, 128, 0.5);
+  color: #D1D5DB;
+  background: transparent;
+}
+
+.hero-btn-secondary:hover {
+  border-color: #8B5CF6;
+  color: white;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  transform: scale(1.05);
+}
+
+/* Custom Cursor */
+.custom-cursor-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cursor-orb {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(139, 92, 246, 0.2) 60%, transparent 100%);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), 0 0 30px rgba(139, 92, 246, 0.2);
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, top 0.3s ease, left 0.3s ease;
+  will-change: transform;
+}
+
+.cursor-orb-interactive {
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: -20px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, rgba(6, 182, 212, 0.2) 60%, transparent 100%);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.5), 0 0 50px rgba(6, 182, 212, 0.2);
+}
+
+.cursor-trail {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, transparent 70%);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Hide default cursor on hero and interactive elements */
+.hero-section *,
+.hero-section a,
+.hero-section button {
+  cursor: none;
+}
+
+/* Restore cursor outside hero */
+@media (max-width: 767px) {
+  .hero-section,
+  .hero-section *,
+  .hero-section a,
+  .hero-section button {
+    cursor: auto;
+  }
+}

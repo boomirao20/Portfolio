@@ -1,29 +1,37 @@
 import { Canvas } from '@react-three/fiber'
 import { Preload } from '@react-three/drei'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import Scene from './Scene'
 
 /**
  * CanvasContainer
  * 
- * Wrapper component for the Three.js canvas.
- * Handles the R3F Canvas setup with proper configuration.
+ * Wrapper for the Three.js R3F canvas with bloom post-processing.
  */
-export default function CanvasContainer() {
+export default function CanvasContainer({ isMobile }) {
     return (
         <Canvas
-            camera={{ position: [0, 0, 5], fov: 75 }}
+            camera={{ position: [0, 0, 6], fov: 65 }}
             gl={{
                 antialias: true,
                 alpha: true,
                 powerPreference: 'high-performance',
             }}
-            dpr={[1, 2]} // Responsive pixel ratio (min 1, max 2 for retina)
+            dpr={[1, isMobile ? 1.5 : 2]}
             style={{ background: 'transparent' }}
         >
-            {/* Scene with 3D objects */}
-            <Scene />
+            <Scene isMobile={isMobile} />
 
-            {/* Preload all assets */}
+            {/* Post-processing bloom */}
+            <EffectComposer>
+                <Bloom
+                    intensity={0.8}
+                    luminanceThreshold={0.2}
+                    luminanceSmoothing={0.9}
+                    mipmapBlur
+                />
+            </EffectComposer>
+
             <Preload all />
         </Canvas>
     )
