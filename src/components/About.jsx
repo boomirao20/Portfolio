@@ -1,6 +1,7 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { GraduationCap, Sparkles, Code2, Brain, Database, Trophy, Calendar, MapPin, ChevronRight, Zap } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { GraduationCap, Sparkles, Code2, Brain, Database, Trophy, Calendar, MapPin, ChevronRight, Zap, ArrowRight } from 'lucide-react'
 
 // Animated counter component
 function AnimatedCounter({ value, suffix = '', duration = 2 }) {
@@ -228,8 +229,8 @@ export default function About() {
                                         onMouseEnter={() => setActiveHighlight(index)}
                                         onMouseLeave={() => setActiveHighlight(null)}
                                         className={`px-4 py-2 rounded-full font-body text-sm transition-all duration-300 ${activeHighlight === index
-                                                ? `bg-gradient-to-r ${highlight.color} text-white shadow-lg`
-                                                : 'bg-white/5 text-gray-300 hover:bg-white/10'
+                                            ? `bg-gradient-to-r ${highlight.color} text-white shadow-lg`
+                                            : 'bg-white/5 text-gray-300 hover:bg-white/10'
                                             }`}
                                     >
                                         {highlight.text}
@@ -314,6 +315,21 @@ export default function About() {
                             <p className="font-body text-sm text-gray-400">
                                 💡 <span className="text-gray-300">Fun fact:</span> I'm always exploring new technologies and love turning creative ideas into working solutions!
                             </p>
+                        </motion.div>
+
+                        {/* View Projects CTA */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.5, delay: 1.0 }}
+                        >
+                            <Link
+                                to="/projects"
+                                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-heading font-semibold text-white bg-gradient-to-r from-accent-blue to-accent-violet hover:shadow-lg hover:shadow-accent-blue/25 transition-all duration-300 group"
+                            >
+                                View Projects
+                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
                         </motion.div>
                     </motion.div>
                 </div>

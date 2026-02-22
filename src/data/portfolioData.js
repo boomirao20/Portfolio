@@ -8,6 +8,7 @@ export const portfolioData = {
         name: 'Boomi Rao',
         title: 'AI & Data Science Student | Web Developer',
         email: 'boomirao0720@gmail.com',
+        phone: '9167280514',
         github: 'https://github.com/boomirao20',
         linkedin: 'https://www.linkedin.com/in/boomirao20/',
         location: 'India',
@@ -132,6 +133,7 @@ ${certifications.map(c => `- **${c.title}** by ${c.issuer}: ${c.description}`).j
 
 ## Contact
 - Email: ${personal.email}
+- Phone: ${personal.phone}
 - GitHub: ${personal.github}
 - LinkedIn: ${personal.linkedin}
 - Location: ${personal.location}
