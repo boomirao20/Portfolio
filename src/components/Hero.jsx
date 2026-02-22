@@ -1,7 +1,7 @@
 import { Suspense, lazy, useState, useEffect, useRef, useCallback, Component } from 'react'
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FolderOpen, MessageCircle } from 'lucide-react'
+import { FolderOpen, MessageCircle, ChevronDown } from 'lucide-react'
 
 // Lazy load the 3D canvas
 const CanvasContainer = lazy(() => import('./CanvasContainer'))
@@ -408,6 +408,35 @@ export default function Hero() {
                     </MagneticButton>
                 </motion.div>
             </motion.div>
+
+            {/* Scroll Down Indicator */}
+            <motion.a
+                href="#fun"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2.5, duration: 0.8 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors cursor-pointer group"
+                aria-label="Scroll down"
+                onClick={(e) => {
+                    e.preventDefault()
+                    document.getElementById('fun')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+            >
+                <span className="font-body text-xs tracking-widest uppercase opacity-60 group-hover:opacity-100 transition-opacity">Scroll</span>
+                <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                    <ChevronDown size={20} />
+                </motion.div>
+                <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
+                    className="opacity-40"
+                >
+                    <ChevronDown size={16} />
+                </motion.div>
+            </motion.a>
 
             {/* Bottom gradient fade */}
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent z-5 pointer-events-none" />

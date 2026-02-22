@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import Hero from './components/Hero'
 import Navbar from './components/Navbar'
 import Chatbot from './components/Chatbot'
+import FunActivities from './components/FunActivities'
+import Footer from './components/Footer'
 import AboutPage from './pages/AboutPage'
 import SkillsPage from './pages/SkillsPage'
 import ProjectsPage from './pages/ProjectsPage'
@@ -15,7 +17,9 @@ function HomePage() {
             <Navbar />
             <main>
                 <Hero />
+                <FunActivities />
             </main>
+            <Footer />
             <Chatbot />
         </div>
     )
