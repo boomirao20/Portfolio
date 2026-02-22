@@ -1,5 +1,6 @@
 import { Suspense, lazy, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ArrowDown, FileDown, FolderOpen } from 'lucide-react'
 
 // Lazy load the 3D canvas for performance
@@ -109,13 +110,13 @@ export default function Hero() {
                     variants={itemVariants}
                     className="flex flex-col sm:flex-row gap-4 justify-center items-center"
                 >
-                    <a
-                        href="#projects"
+                    <Link
+                        to="/projects"
                         className="group flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-blue to-accent-violet rounded-full font-heading font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-accent-blue/25 hover:scale-105"
                     >
                         <FolderOpen size={20} />
                         View Projects
-                    </a>
+                    </Link>
                     <a
                         href="/resume.pdf"
                         download
