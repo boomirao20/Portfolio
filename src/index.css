@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /* Base Styles */
 * {
@@ -18,7 +18,7 @@ html {
   html {
     scroll-behavior: auto;
   }
-  
+
   *,
   *::before,
   *::after {
@@ -36,7 +36,12 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
 }
@@ -88,7 +93,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Section Base */
 .section {
-  @apply py-20 md:py-28 px-4 md:px-8 max-w-7xl mx-auto;
+  padding: 5rem 1rem;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 7rem 2rem;
+  }
 }
 
 /* Card Hover Effect */
@@ -109,14 +123,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Interactive Name */
 .hero-name {
-  background: linear-gradient(
-    135deg,
-    #3B82F6 0%,
-    #8B5CF6 25%,
-    #06B6D4 50%,
-    #8B5CF6 75%,
-    #3B82F6 100%
-  );
+  background: linear-gradient(135deg,
+      #3B82F6 0%,
+      #8B5CF6 25%,
+      #06B6D4 50%,
+      #8B5CF6 75%,
+      #3B82F6 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -125,8 +137,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Magnetic Buttons */
@@ -204,6 +223,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Restore cursor outside hero */
 @media (max-width: 767px) {
+
   .hero-section,
   .hero-section *,
   .hero-section a,
